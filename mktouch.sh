@@ -11,22 +11,19 @@ opt_h=0
 MKDIR=$(which mkdir)
 TOUCH=$(which touch)
 # Colours
-RESET=""
-RED=""
-
-# Check for this as it can fail or we just remove colours
-if [ "${TERM}" != "" ]; then
-  # Reset
-  RESET=$(tput sgr0)    # Text Reset
-  # Regular Colors
-  RED=$(tput setaf 1)   # Red
-fi
+# Colours
+RED=$'\e[1;31m'
+GRN=$'\e[1;32m'
+YEL=$'\e[1;33m'
+BLU=$'\e[1;34m'
+BLD=$'\e[1;1m'
+END=$'\e[0m'
 
 usage() {
-  echo "$(basename $0) [opts] <directory> - <files>"
+  echo "${GRN}$(basename $0)${END} [opts] <directory> - <files>"
   echo ""
   echo "Example:"
-  echo "  $ $(basename $0) ./src/example -- {index,demo}.js"
+  echo "  $ ${GRN}$(basename $0)${END} ./src/example -- {index,demo}.js"
   echo ""
   echo "Options:"
   echo "  -h:        This help message"
@@ -75,7 +72,7 @@ for argument in "$@"; do
 done
 
 if [ ${#DIRS[@]} -lt 1 ]; then
-  echo "${RED}No directories to create${RESET}"
+  echo "${RED}No directories to create${END}"
   echo ""
   usage
 fi
@@ -86,7 +83,7 @@ for argument in "$@"; do
 done
 
 if [ ${#FILES[@]} -lt 1 ]; then
-  echo "${RED}No files to create${RESET}"
+  echo "${RED}No files to create${END}"
   echo ""
   usage
 fi
