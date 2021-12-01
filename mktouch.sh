@@ -22,7 +22,7 @@ usage() {
   echo "${GRN}$(basename $0)${END} [opts] <directory> - <files>"
   echo ""
   echo "Example:"
-  echo "  $ ${GRN}$(basename $0)${END} ./src/example -- {index,demo}.js"
+  echo "  $ ${GRN}$(basename $0)${END} ./src/example - {index,demo}.js"
   echo ""
   echo "Options:"
   echo "  -h:        This help message"
