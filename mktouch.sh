@@ -11,7 +11,6 @@ opt_h=0
 MKDIR=$(which mkdir)
 TOUCH=$(which touch)
 # Colours
-# Colours
 RED=$'\e[1;31m'
 GRN=$'\e[1;32m'
 YEL=$'\e[1;33m'
@@ -38,10 +37,10 @@ create_path () {
   unset 'arguments[0]'
 
   echo "=> Creating ${dir}"
-  MKDIR -p "${dir}"
+  ${MKDIR} -p "${dir}"
 
   for file in "${arguments[@]}" ; do
-      TOUCH "${dir}/${file}"
+    ${TOUCH} "${dir}/${file}"
   done
 }
 
