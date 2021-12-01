@@ -6,8 +6,8 @@ on:
       - 'main'
 
 jobs:
-  test:
-    name: Test mktouch
+  mktouch:
+    name: Run mktouch
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -17,12 +17,21 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Run Script
+      - name: Run valid script
         run: |
           ./mktouch.sh ./temp/{1,2,3,4} - index.sh
-      - name: Test Script
-        run: |
+
           [ ! -f "./temp/1/index.sh" ] && { echo "./temp/1/index.sh does not exist"; exit 1; } || echo "./temp/1/index.sh does exist"
           [ ! -f "./temp/2/index.sh" ] && { echo "./temp/2/index.sh does not exist"; exit 1; } || echo "./temp/2/index.sh does exist"
           [ ! -f "./temp/3/index.sh" ] && { echo "./temp/3/index.sh does not exist"; exit 1; } || echo "./temp/3/index.sh does exist"
           [ ! -f "./temp/4/index.sh" ] && { echo "./temp/4/index.sh does not exist"; exit 1; } || echo "./temp/4/index.sh does exist"
+      - name: Run invalid script
+        run: |
+          ./mktouch.sh ./temp/dir
+          [ $? -ne 1 ] && { echo "Did not fail"; exit 1; } || echo "Failed correctly with invalid arg length"
+
+          ./mktouch.sh - index.sh
+          [ $? -ne 1 ] && { echo "Did not fail"; exit 1; } || echo "Failed correctly with no dir"
+
+          ./mktouch.sh ./temp/dir -
+          [ $? -ne 1 ] && { echo "Did not fail"; exit 1; } || echo "Failed correctly with no files"

@@ -10,10 +10,17 @@ opt_h=0
 # Get the commands
 MKDIR=$(which mkdir)
 TOUCH=$(which touch)
-# Reset
-RESET=$(tput sgr0)    # Text Reset
-# Regular Colors
-RED=$(tput setaf 1)          # Red
+# Colours
+RESET=""
+RED=""
+
+# Check for this as it can fail or we just remove colours
+if [ "${TERM}" != "" ]; then
+  # Reset
+  RESET=$(tput sgr0)    # Text Reset
+  # Regular Colors
+  RED=$(tput setaf 1)   # Red
+fi
 
 usage() {
   echo "$(basename $0) [opts] <directory> - <files>"
