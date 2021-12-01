@@ -31,4 +31,4 @@ jobs:
 
           ./mktouch.sh - index.sh || echo "Failed correctly with no dir"
 
-          ./mktouch.sh - index.sh || echo "Failed correctly with no files"
+          ./mktouch.sh ./temp/dir - || echo "Failed correctly with no files"
