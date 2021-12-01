@@ -1,0 +1,24 @@
+name: mktouch
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  test:
+    name: Test mktouch
+    runs-on: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Run Script
+        run: |
+          ./mktouch.sh ./temp/{1,2,3,4} - index.sh
+      - name: Test Script
+        run: |
+          [ ! -f "./temp/1/index.sh" ] && { echo "./temp/1/index.sh does not exist"; exit 1; } || echo "./temp/1/index.sh does exist"
+          [ ! -f "./temp/2/index.sh" ] && { echo "./temp/2/index.sh does not exist"; exit 1; } || echo "./temp/2/index.sh does exist"
+          [ ! -f "./temp/3/index.sh" ] && { echo "./temp/3/index.sh does not exist"; exit 1; } || echo "./temp/3/index.sh does exist"
+          [ ! -f "./temp/4/index.sh" ] && { echo "./temp/4/index.sh does not exist"; exit 1; } || echo "./temp/4/index.sh does exist"
