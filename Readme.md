@@ -2,6 +2,8 @@
 
 [![mktouch](https://github.com/harrytwright/mktouch/actions/workflows/mktouch.sh.yml/badge.svg)](https://github.com/harrytwright/mktouch/actions/workflows/mktouch.sh.yml)
 
+> Version 1.0.1
+
 This is a utility to allow for creating and populating folders
 
 > This is a little wrapper for `mkdir` & `touch`
