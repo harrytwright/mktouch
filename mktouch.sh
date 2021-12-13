@@ -24,7 +24,7 @@ log() {
 }
 
 version() {
-  log "version: 1.0.0"
+  log "version: 1.0.1"
 }
 
 usage() {
@@ -46,7 +46,7 @@ create_path () {
   dir=${arguments[0]}
   unset 'arguments[0]'
 
-  log ${GRN}"=>${END} Creating ${dir}"
+  log "${GRN}=>${END} Creating ${dir}"
   ${MKDIR} -p "${dir}"
 
   for file in "${arguments[@]}" ; do
