@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Version: 1.0.1
 # By: Harry Wright <haroldtomwright@gmail.com>
 # License: Apache License 2.0
 # Source repo: https://github.com/harrytwright/mktouch
@@ -7,7 +8,7 @@
 set -e
 # Help options
 opt_h=0
-opt_v=0
+opt_s=0
 # Get the commands
 MKDIR=$(which mkdir)
 TOUCH=$(which touch)
@@ -20,11 +21,10 @@ BLD=$'\e[1;1m'
 END=$'\e[0m'
 
 log() {
-  [ "$opt_v" = "1" ] && echo "$@"
-}
-
-version() {
-  log "version: 1.0.1"
+  # for backwards support where all items are logged
+  if [ "$opt_s" = "0" ]; then
+    echo "$1"
+  fi
 }
 
 usage() {
@@ -35,8 +35,7 @@ usage() {
   echo ""
   echo "Options:"
   echo "  -h:        This help message"
-  log ""
-  version
+  echo "  -s:        Silence the logging"
   [ "$opt_h" = "1" ] && exit 0 || exit 1
 }
 
@@ -54,11 +53,11 @@ create_path () {
   done
 }
 
-while getopts ':vh' opt; do
+while getopts ':sh' opt; do
   # shellcheck disable=SC2220
   case $opt in
     h) opt_h=1;;
-    v) opt_v=1;;
+    s) opt_s=1;;
   esac
 done
 shift $(expr "$OPTIND" - 1)
