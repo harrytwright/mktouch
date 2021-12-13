@@ -32,6 +32,7 @@ jobs:
       - name: Run valid script
         if: ${{ matrix.os == 'windows-latest' }}
         run: ./mktouch.sh ./temp/{1,2,3,4} - index.sh
+        shell: bash
       - name: Run invalid script
         run: |
           ./mktouch.sh ./temp/dir || echo "Failed correctly with invalid arg length"
@@ -39,3 +40,4 @@ jobs:
           ./mktouch.sh - index.sh || echo "Failed correctly with no dir"
 
           ./mktouch.sh ./temp/dir - || echo "Failed correctly with no files"
+        shell: bash
