@@ -7,6 +7,7 @@
 set -e
 # Help options
 opt_h=0
+opt_v=0
 # Get the commands
 MKDIR=$(which mkdir)
 TOUCH=$(which touch)
@@ -18,6 +19,14 @@ BLU=$'\e[1;34m'
 BLD=$'\e[1;1m'
 END=$'\e[0m'
 
+log() {
+  [ "$opt_v" = "1" ] && echo "$@"
+}
+
+version() {
+  log "version: 1.0.0"
+}
+
 usage() {
   echo "${GRN}$(basename $0)${END} [opts] <directory> - <files>"
   echo ""
@@ -26,7 +35,8 @@ usage() {
   echo ""
   echo "Options:"
   echo "  -h:        This help message"
-  echo ""
+  log ""
+  version
   [ "$opt_h" = "1" ] && exit 0 || exit 1
 }
 
@@ -36,7 +46,7 @@ create_path () {
   dir=${arguments[0]}
   unset 'arguments[0]'
 
-  echo "=> Creating ${dir}"
+  log ${GRN}"=>${END} Creating ${dir}"
   ${MKDIR} -p "${dir}"
 
   for file in "${arguments[@]}" ; do
@@ -44,10 +54,11 @@ create_path () {
   done
 }
 
-while getopts 'h:' opt; do
+while getopts ':vh' opt; do
   # shellcheck disable=SC2220
   case $opt in
     h) opt_h=1;;
+    v) opt_v=1;;
   esac
 done
 shift $(expr "$OPTIND" - 1)
