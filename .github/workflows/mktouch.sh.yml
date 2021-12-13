@@ -29,9 +29,6 @@ jobs:
           [ ! -f "./temp/2/index.sh" ] && { echo "./temp/2/index.sh does not exist"; exit 1; } || echo "./temp/2/index.sh does exist"
           [ ! -f "./temp/3/index.sh" ] && { echo "./temp/3/index.sh does not exist"; exit 1; } || echo "./temp/3/index.sh does exist"
           [ ! -f "./temp/4/index.sh" ] && { echo "./temp/4/index.sh does not exist"; exit 1; } || echo "./temp/4/index.sh does exist"
-      - name: Run valid script
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: ./mktouch.sh ./temp/{1,2,3,4} - index.sh
         shell: bash
       - name: Run invalid script
         run: |
