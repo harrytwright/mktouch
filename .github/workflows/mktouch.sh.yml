@@ -2,8 +2,11 @@ name: mktouch
 
 on:
   push:
+    tags:
+      - 'v*.*.*'
     branches:
       - 'main'
+      - 'releases/**'
 
 jobs:
   mktouch:
@@ -12,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
       - name: Check out code
